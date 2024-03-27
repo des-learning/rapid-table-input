@@ -7,7 +7,9 @@ use Livewire\Component;
 
 class RapidTableInput extends Component
 {
-    public array $items = [];
+    public array $items = [
+        ['row' => 0, 'nama' => 'example', 'harga' => 1000, 'quantity' => 5, 'total' => 1000 * 5],
+    ];
 
     public function render()
     {

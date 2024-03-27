@@ -2,7 +2,7 @@
     nama: '',
     harga: 0,
     quantity: 0,
-    lastrow: 0,
+    lastrow: $wire.items.length,
     update: false,
     editrow: -1,
     get total() {
