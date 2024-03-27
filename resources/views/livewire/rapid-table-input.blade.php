@@ -43,33 +43,43 @@ $refs.input_nama.focus();" x-text="update ? 'Update' : 'Tambah'">Tambah</button>
 
     <div class="flex">
         <table>
-            <tr>
-                <th>No</th>
-                <th>Nama Barang</th>
-                <th>Harga</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>action</th>
-            </tr>
-            <template x-for="item in $wire.items">
+            <thead>
                 <tr>
-                    <td x-text="item.row"></td>
-                    <td x-text="item.nama"></td>
-                    <td x-text="item.harga"></td>
-                    <td x-text="item.quantity"></td>
-                    <td x-text="item.total"></td>
-                    <td>
-                        <button type="button" @click="if (confirm('yakin di hapus?')) {
+                    <th>No</th>
+                    <th>Nama Barang</th>
+                    <th>Harga</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="item in $wire.items">
+                    <tr>
+                        <td x-text="item.row"></td>
+                        <td x-text="item.nama"></td>
+                        <td x-text="item.harga"></td>
+                        <td x-text="item.quantity"></td>
+                        <td x-text="item.total"></td>
+                        <td>
+                            <button type="button" @click="if (confirm('yakin di hapus?')) {
                         const index = $wire.items.findIndex(x => x.row === item.row);
                         if (index < 0) {
 return;
 }
                         $wire.items.splice(index, 1);
                         }">Delete</button>
-                        <button type="button" @click="nama = item.nama; harga = item.harga; quantity = item.quantity; editrow = item.row; update = true; $refs.input_nama.focus()">Edit</button>
-                    </td>
+                            <button type="button" @click="nama = item.nama; harga = item.harga; quantity = item.quantity; editrow = item.row; update = true; $refs.input_nama.focus()">Edit</button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Total</td>
+                    <td x-text="$wire.items.reduce((a, b) => a + b.total, 0)"></td>
                 </tr>
-            </template>
+            </tfoot>
         </table>
     </div>
 </div>
