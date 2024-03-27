@@ -1,7 +1,17 @@
-<div class="flex gap-2" x-data="{ nama: '', harga: 0, quantity: 0, total: 0, lastrow: 0, update: false, editrow: -1 }" x-init="$watch('harga', value => total = value * quantity); $watch('quantity', value => total = harga * value)">
-    <input type="text" placeolder="nama barang" x-model="nama" x-ref="input_nama" autofocus />
-    <input type="number" placeolder="harga barang" x-model="harga" />
-    <input type="number" placeolder="quantity barang" x-model="quantity" />
+<div class="flex gap-2" x-data="{
+    nama: '',
+    harga: 0,
+    quantity: 0,
+    lastrow: 0,
+    update: false,
+    editrow: -1,
+    get total() {
+        return this.harga * this.quantity;
+    }
+}">
+    <input type="text" placeholder="nama barang" x-model="nama" x-ref="input_nama" autofocus />
+    <input type="number" placeholder="harga barang" x-model="harga" />
+    <input type="number" placeholder="quantity barang" x-model="quantity" />
     <span x-text="total"></span>
     <button type="button" @click="if (update) {
     if (editrow < 0) {
